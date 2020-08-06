@@ -82,6 +82,12 @@ namespace Basics.Geometry
 
             _lengthSquared = other.X * other.X + other.Y * other.Y;
         }
+
+        public Vector2D(Point2D point)
+        {
+            X = point.X;
+            Y = point.Y;
+        }
         #endregion Constructors
 
 
@@ -182,6 +188,11 @@ namespace Basics.Geometry
 
             return new Vector2D(one.X / divisor, one.Y / divisor);
         }
-        #endregion Operstors
+
+        public static explicit operator Vector2D(Point2D point)
+        {
+            return new Vector2D(point);
+        }
     }
+    #endregion Operstors
 }
