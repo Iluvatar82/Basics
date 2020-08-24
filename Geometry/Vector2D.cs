@@ -129,6 +129,27 @@ namespace Basics.Geometry
         {
             Rotate(Conversion.DegreesToRadians(angleInDegrees));
         }
+
+        public double DistanceTo(Point2D point)
+        {
+            var vectorToPoint = new Vector2D(point);
+            var vectorLength = vectorToPoint.Length;
+            vectorToPoint.Normalize();
+            var normalized = new Vector2D(this);
+            normalized.Normalize();
+
+            var vectorBase = new Vector2D(normalized) * (normalized.Dot(vectorToPoint) * vectorLength);
+            return new Vector2D(point - vectorBase).Length;
+        }
+
+        public double Dot(Vector2D other)
+        {
+            return X * other.X + Y * other.Y;
+        }
+
+        public static void DistanceTo(Vector2D vector, Point2D point) => vector.DistanceTo(point);
+
+        public static double Dot(Vector2D one, Vector2D two) => one.Dot(two);
         #endregion Functions
 
 
@@ -148,9 +169,14 @@ namespace Basics.Geometry
             return new Vector2D(one.X + add, one.Y + add);
         }
 
-        public static Vector2D operator -(Vector2D ome, Vector2D two)
+        public static Vector2D operator -(Vector2D one, Vector2D two)
         {
-            return new Vector2D(ome.X - two.X, ome.Y - two.Y);
+            return new Vector2D(one.X - two.X, one.Y - two.Y);
+        }
+
+        public static Vector2D operator -(Vector2D one, Point2D point)
+        {
+            return new Vector2D(one.X - point.X, one.Y - point.Y);
         }
 
         public static Vector2D operator -(Vector2D one, double subtract)
@@ -193,6 +219,14 @@ namespace Basics.Geometry
         {
             return new Vector2D(point);
         }
+        #endregion Operstors
+
+
+        #region Overrides
+        public override string ToString()
+        {
+            return $"X: {X:F2} Y: {Y:F2}";
+        }
+        #endregion Overrides
     }
-    #endregion Operstors
 }

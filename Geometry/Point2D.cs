@@ -68,5 +68,13 @@
             return new Point2D(vector);
         }
         #endregion Operstors
+
+
+        #region Overrides
+        public override string ToString()
+        {
+            return $"X: {X:F2} Y: {Y:F2}";
+        }
+        #endregion Overrides
     }
 }
