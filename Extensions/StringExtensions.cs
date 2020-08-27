@@ -98,5 +98,11 @@
 
             return new string(result);
         }
+
+        public static string DecorateStartEnd(this string toDecorate, char decorator) => decorator + toDecorate + decorator;
+
+        public static string DecorateStartEnd(this string toDecorate, string decorator) => decorator + toDecorate + decorator;
+
+        public static string SQLStringify(this string sqlValue) => DecorateStartEnd(sqlValue, '\'');
     }
 }
