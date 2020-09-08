@@ -67,7 +67,7 @@
         {
             return new Point2D(vector);
         }
-        #endregion Operstors
+        #endregion Operators
 
 
         #region Overrides

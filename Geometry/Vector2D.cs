@@ -219,7 +219,7 @@ namespace Basics.Geometry
         {
             return new Vector2D(point);
         }
-        #endregion Operstors
+        #endregion Operators
 
 
         #region Overrides

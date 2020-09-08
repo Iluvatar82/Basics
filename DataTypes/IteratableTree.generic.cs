@@ -1,67 +1,45 @@
-﻿using Basics.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Basics.Extensions;
 
 namespace Basics.DataTypes
 {
-    public class Tree<T>
+    public class IteratableTree<T> : Tree<T>
     {
-        #region Variables & Fields
-        public TreeNode<T> Root { get; set; }
-        public long NodeCount => Root.Count;
-        public long Height => Root.Height;
-        #endregion Variables & Fields
-
-
         #region Constructors
-        public Tree() { }
+        public IteratableTree() { }
 
-        public Tree(T rootValue)
+        public IteratableTree(T rootValue)
         {
-            Root = new TreeNode<T>(rootValue);
+            Root = new IteratableTreeNode<T>(rootValue);
         }
 
-        public Tree(TreeNode<T> root)
+        public IteratableTree(IteratableTreeNode<T> root)
         {
             Root = root;
         }
         #endregion Constructors
-
-
-        #region Overrides
-        public override string ToString()
-        {
-            return $"Root: {Root}";
-        }
-        #endregion Overrides
     }
 
-    public class TreeNode<T>
+    public class IteratableTreeNode<T> : TreeNode<T>
     {
         #region Variables & Fields
-        public T Value { get; set; }
-
-        public TreeNode<T> Parent { get; set; }
-        public List<TreeNode<T>> Children { get; set; }
-
-        public bool IsRoot => Parent == default;
-        public bool IsLeaf => Children == default || Children.Count == 0;
-        public long Count => Children?.Sum(c => c.Count) + 1 ?? 1;
-        public long Height => Children?.Max(c => c.Height) + 1 ?? 1;
+        public IteratableTreeNode<T> Previous { get; set; }
+        public IteratableTreeNode<T> Next { get; set; }
         #endregion Variables & Fields
 
 
         #region Constructors
-        public TreeNode() { }
+        public IteratableTreeNode() { }
 
-        public TreeNode(T value)
+        public IteratableTreeNode(T value)
         {
             Value = value;
         }
 
-        public TreeNode(T value, TreeNode<T> parent)
-            :this(value)
+        public IteratableTreeNode(T value, IteratableTreeNode<T> parent)
+            : this(value)
         {
             Parent = parent;
             if (Parent != null)
@@ -71,14 +49,14 @@ namespace Basics.DataTypes
 
 
         #region Functions
-        public virtual TreeNode<T> AddChild(T value)
+        public override TreeNode<T> AddChild(T value)
         {
             var newNode = new TreeNode<T>(value);
             AddChild(newNode);
             return newNode;
         }
 
-        public virtual bool AddChild(TreeNode<T> node)
+        public override bool AddChild(TreeNode<T> node)
         {
             if (node == null)
                 return false;
@@ -91,7 +69,7 @@ namespace Basics.DataTypes
             return true;
         }
 
-        public virtual bool RemoveChild(TreeNode<T> node)
+        public override bool RemoveChild(TreeNode<T> node)
         {
             if (node == null || Children == default || !Children.Any())
                 return false;
@@ -100,7 +78,7 @@ namespace Basics.DataTypes
             return Children.Remove(node);
         }
 
-        public virtual long RemoveChildren(T value)
+        public override long RemoveChildren(T value)
         {
             if (Children == default || !Children.Any())
                 return 0;
@@ -113,14 +91,14 @@ namespace Basics.DataTypes
             return nodesToRemove.Count;
         }
 
-        public virtual long RemoveChildren(IEnumerable<T> values)
+        public override long RemoveChildren(IEnumerable<T> values)
         {
             if (values == null || !values.Any() || Children == default || !Children.Any())
                 return 0;
 
-            var valuesLookup = new HashSet<T> (values);
+            var valuesLookup = new HashSet<T>(values);
             long removedCount = 0;
-            for(var i = Children.Count - 1; i >= 0; i--)
+            for (var i = Children.Count - 1; i >= 0; i--)
             {
                 var currentChild = Children[i];
                 if (valuesLookup.Contains(currentChild.Value))
@@ -134,12 +112,12 @@ namespace Basics.DataTypes
             return removedCount;
         }
 
-        public virtual long RemoveChildren(IEnumerable<TreeNode<T>> nodes)
+        public override long RemoveChildren(IEnumerable<TreeNode<T>> nodes)
         {
             if (nodes == null || !nodes.Any() || Children == default || !Children.Any())
                 return 0;
 
-            var nodesLookup = new HashSet<TreeNode<T>> (nodes);
+            var nodesLookup = new HashSet<TreeNode<T>>(nodes);
             long removedCount = 0;
             for (var i = Children.Count - 1; i >= 0; i--)
             {
