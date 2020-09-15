@@ -71,13 +71,6 @@ namespace Basics.DataTypes
 
 
         #region Functions
-        public virtual TreeNode<T> AddChild(T value)
-        {
-            var newNode = new TreeNode<T>(value);
-            AddChild(newNode);
-            return newNode;
-        }
-
         public virtual bool AddChild(TreeNode<T> node)
         {
             if (node == null)
@@ -155,6 +148,13 @@ namespace Basics.DataTypes
             return removedCount;
         }
         #endregion Functions
+
+
+        #region Operators
+        public static implicit operator TreeNode<T>(T value) => new TreeNode<T>(value);
+        
+        public static implicit operator T(TreeNode<T> node) => node.Value;
+        #endregion Operators
 
 
         #region Overrides

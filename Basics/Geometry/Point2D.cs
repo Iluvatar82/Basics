@@ -43,38 +43,20 @@
 
 
         #region Operators
-        public static Point2D operator +(Point2D point, double value)
-        {
-            return new Point2D(point.X + value, point.Y + value);
-        }
+        public static Point2D operator +(Point2D point, double value) => new Point2D(point.X + value, point.Y + value);
 
-        public static Point2D operator +(Point2D point, Vector2D translate)
-        {
-            return new Point2D(point.X + translate.X, point.Y + translate.Y);
-        }
+        public static Point2D operator +(Point2D point, Vector2D translate) => new Point2D(point.X + translate.X, point.Y + translate.Y);
 
-        public static Point2D operator -(Point2D point, double value)
-        {
-            return new Point2D(point.X - value, point.Y - value);
-        }
+        public static Point2D operator -(Point2D point, double value) => new Point2D(point.X - value, point.Y - value);
 
-        public static Point2D operator -(Point2D point, Vector2D translate)
-        {
-            return new Point2D(point.X - translate.X, point.Y - translate.Y);
-        }
+        public static Point2D operator -(Point2D point, Vector2D translate) => new Point2D(point.X - translate.X, point.Y - translate.Y);
 
-        public static explicit operator Point2D(Vector2D vector)
-        {
-            return new Point2D(vector);
-        }
+        public static explicit operator Point2D(Vector2D vector) => new Point2D(vector);
         #endregion Operators
 
 
         #region Overrides
-        public override string ToString()
-        {
-            return $"X: {X:F2} Y: {Y:F2}";
-        }
+        public override string ToString() => $"X: {X:F2} Y: {Y:F2}";
         #endregion Overrides
     }
 }

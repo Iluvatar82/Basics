@@ -15,5 +15,17 @@ namespace Basics.Extensions
                 yield return item;
             }
         }
+
+        public static IEnumerable<T> CastTo<TBase, T>(this IEnumerable<TBase> baseEnumerable) where T : TBase
+        {
+            foreach (var item in baseEnumerable)
+                yield return (T)item;
+        }
+
+        public static IEnumerable<TBase> CastTo<TBase, T>(this IEnumerable<T> derivedEnumerable) where T : TBase
+        {
+            foreach (var item in derivedEnumerable)
+                yield return item;
+        }
     }
 }

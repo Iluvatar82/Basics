@@ -125,27 +125,9 @@ namespace Basics.Geometry
             _y = y;
         }
 
-        public void RotateDegrees(double angleInDegrees)
-        {
-            Rotate(Conversion.DegreesToRadians(angleInDegrees));
-        }
+        public void RotateDegrees(double angleInDegrees) => Rotate(Conversion.DegreesToRadians(angleInDegrees));
 
-        public double DistanceTo(Point2D point)
-        {
-            var vectorToPoint = new Vector2D(point);
-            var vectorLength = vectorToPoint.Length;
-            vectorToPoint.Normalize();
-            var normalized = new Vector2D(this);
-            normalized.Normalize();
-
-            var vectorBase = new Vector2D(normalized) * (normalized.Dot(vectorToPoint) * vectorLength);
-            return new Vector2D(point - vectorBase).Length;
-        }
-
-        public double Dot(Vector2D other)
-        {
-            return X * other.X + Y * other.Y;
-        }
+        public double Dot(Vector2D other) => X * other.X + Y * other.Y;
 
         public static void DistanceTo(Vector2D vector, Point2D point) => vector.DistanceTo(point);
 
@@ -154,50 +136,23 @@ namespace Basics.Geometry
 
 
         #region Operators
-        public static Vector2D operator +(Vector2D one, Vector2D two)
-        {
-            return new Vector2D(one.X + two.X, one.Y + two.Y);
-        }
+        public static Vector2D operator +(Vector2D one, Vector2D two) => new Vector2D(one.X + two.X, one.Y + two.Y);
 
-        public static Vector2D operator +(Vector2D one, double add)
-        {
-            return new Vector2D(one.X + add, one.Y + add);
-        }
+        public static Vector2D operator +(Vector2D one, double add) => new Vector2D(one.X + add, one.Y + add);
 
-        public static Vector2D operator +(double add, Vector2D one)
-        {
-            return new Vector2D(one.X + add, one.Y + add);
-        }
+        public static Vector2D operator +(double add, Vector2D one) => new Vector2D(one.X + add, one.Y + add);
 
-        public static Vector2D operator -(Vector2D one, Vector2D two)
-        {
-            return new Vector2D(one.X - two.X, one.Y - two.Y);
-        }
+        public static Vector2D operator -(Vector2D one, Vector2D two) => new Vector2D(one.X - two.X, one.Y - two.Y);
 
-        public static Vector2D operator -(Vector2D one, Point2D point)
-        {
-            return new Vector2D(one.X - point.X, one.Y - point.Y);
-        }
+        public static Vector2D operator -(Vector2D one, Point2D point) => new Vector2D(one.X - point.X, one.Y - point.Y);
 
-        public static Vector2D operator -(Vector2D one, double subtract)
-        {
-            return new Vector2D(one.X - subtract, one.Y - subtract);
-        }
+        public static Vector2D operator -(Vector2D one, double subtract) => new Vector2D(one.X - subtract, one.Y - subtract);
 
-        public static Vector2D operator -(double subtract, Vector2D one)
-        {
-            return new Vector2D(one.X - subtract, one.Y - subtract);
-        }
+        public static Vector2D operator -(double subtract, Vector2D one) => new Vector2D(one.X - subtract, one.Y - subtract);
 
-        public static Vector2D operator *(Vector2D one, double factor)
-        {
-            return new Vector2D(one.X * factor, one.Y * factor);
-        }
+        public static Vector2D operator *(Vector2D one, double factor) => new Vector2D(one.X * factor, one.Y * factor);
 
-        public static Vector2D operator *(double factor, Vector2D one)
-        {
-            return new Vector2D(one.X * factor, one.Y * factor);
-        }
+        public static Vector2D operator *(double factor, Vector2D one) => new Vector2D(one.X * factor, one.Y * factor);
 
         public static Vector2D operator /(Vector2D one, double divisor)
         {
@@ -215,18 +170,12 @@ namespace Basics.Geometry
             return new Vector2D(one.X / divisor, one.Y / divisor);
         }
 
-        public static explicit operator Vector2D(Point2D point)
-        {
-            return new Vector2D(point);
-        }
+        public static explicit operator Vector2D(Point2D point) => new Vector2D(point);
         #endregion Operators
 
 
         #region Overrides
-        public override string ToString()
-        {
-            return $"X: {X:F2} Y: {Y:F2}";
-        }
+        public override string ToString() => $"X: {X:F2} Y: {Y:F2}";
         #endregion Overrides
     }
 }

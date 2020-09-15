@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Basics.Extensions;
 using System.Collections.Generic;
 using System.Linq;
-using Basics.Extensions;
 
 namespace Basics.DataTypes
 {
@@ -22,7 +21,7 @@ namespace Basics.DataTypes
         #endregion Constructors
     }
 
-    public class IteratableTreeNode<T> : TreeNode<T>
+    public class IteratableTreeNode<T> : TreeNode<T>, IIteratable<IteratableTreeNode<T>>
     {
         #region Variables & Fields
         public IteratableTreeNode<T> Previous { get; set; }
@@ -36,6 +35,14 @@ namespace Basics.DataTypes
         public IteratableTreeNode(T value)
         {
             Value = value;
+
+            Previous = null;
+            Next = null;
+        }
+
+        public IteratableTreeNode(TreeNode<T> node) :this(node.Value)
+        {
+            Children = node.Children;
         }
 
         public IteratableTreeNode(T value, IteratableTreeNode<T> parent)
@@ -49,24 +56,52 @@ namespace Basics.DataTypes
 
 
         #region Functions
-        public override TreeNode<T> AddChild(T value)
-        {
-            var newNode = new TreeNode<T>(value);
-            AddChild(newNode);
-            return newNode;
-        }
-
         public override bool AddChild(TreeNode<T> node)
         {
             if (node == null)
                 return false;
 
+            var iteratableNode = (IteratableTreeNode<T>)node;
             node.Parent = this;
             if (Children == default)
                 Children = new List<TreeNode<T>>();
+            else
+            {
+                var lastIteratableNode = (IteratableTreeNode<T>)Children.Last();
+                lastIteratableNode.Next = iteratableNode;
+                iteratableNode.Previous = lastIteratableNode;
+            }
 
-            Children.Add(node);
+            Children.Add(iteratableNode);
             return true;
+        }
+
+        public bool Insert(int position, IteratableTreeNode<T> iteratableNode)
+        {
+            if (Children == default)
+                Children = new List<TreeNode<T>>();
+
+            if (position < 0 || position > Children.Count)
+            {
+                AddChild(iteratableNode);
+                return true;
+            }
+
+            var previous = position > 0 ? (IteratableTreeNode<T>)Children[position - 1] : null;
+            var next = position < Children.Count ? (IteratableTreeNode<T>)Children[position] : null;
+
+            if (previous != null)
+                previous.Next = iteratableNode;
+
+            if (next != null)
+                next.Previous = iteratableNode;
+
+            iteratableNode.Previous = previous;
+            iteratableNode.Next = next;
+
+            Children.Add(iteratableNode);
+            return true;
+
         }
 
         public override bool RemoveChild(TreeNode<T> node)
@@ -75,6 +110,8 @@ namespace Basics.DataTypes
                 return false;
 
             node.Parent = null;
+            var iteratableNode = (IteratableTreeNode<T>)node;
+            ConnectPreviousAndNextNodes(iteratableNode?.Previous, iteratableNode?.Next);
             return Children.Remove(node);
         }
 
@@ -85,7 +122,11 @@ namespace Basics.DataTypes
 
             var nodesToRemove = Children.Where(tn => tn.Value.Equals(value)).ToList();
             foreach (var node in nodesToRemove)
+            {
                 node.Parent = null;
+                var iteratableNode = (IteratableTreeNode<T>)node;
+                ConnectPreviousAndNextNodes(iteratableNode?.Previous, iteratableNode?.Next);
+            }
 
             Children = Children.Remove(tn => tn.Value.Equals(value)).ToList();
             return nodesToRemove.Count;
@@ -105,6 +146,8 @@ namespace Basics.DataTypes
                 {
                     removedCount++;
                     currentChild.Parent = null;
+                    var iteratableChildNode = (IteratableTreeNode<T>)currentChild;
+                    ConnectPreviousAndNextNodes(iteratableChildNode?.Previous, iteratableChildNode?.Next);
                     Children.Remove(currentChild);
                 }
             }
@@ -126,13 +169,31 @@ namespace Basics.DataTypes
                 {
                     removedCount++;
                     currentChild.Parent = null;
+                    var iteratableChildNode = (IteratableTreeNode<T>)currentChild;
+                    ConnectPreviousAndNextNodes(iteratableChildNode?.Previous, iteratableChildNode?.Next);
                     Children.Remove(currentChild);
                 }
             }
 
             return removedCount;
         }
+
+        private void ConnectPreviousAndNextNodes(IteratableTreeNode<T> previous, IteratableTreeNode<T> next)
+        {
+            if (previous != null)
+                previous.Next = next;
+
+            if (next != null)
+                next.Previous = previous;
+        }
         #endregion Functions
+
+
+        #region Operators
+        public static implicit operator IteratableTreeNode<T>(T value) => new IteratableTreeNode<T>(value);
+        
+        public static implicit operator T(IteratableTreeNode<T> node) => node.Value;
+        #endregion Operators
 
 
         #region Overrides

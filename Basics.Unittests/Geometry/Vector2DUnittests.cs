@@ -122,19 +122,5 @@ namespace Basics.Geometry.Tests
             vector2.Normalize();
             Assert.AreEqual(result, vector1.Dot(vector2), Conversion.E);
         }
-
-        [DataRow(1, 0, 0, 1, 1)]
-        [DataRow(10, 0, 1, 1, 1)]
-        [DataRow(1, 0, 5, 10, 10)]
-        [DataRow(0, 1, 0, 10, 0)]
-        [DataRow(0, 1, 1, 11, 1)]
-        [DataRow(1.414213, 1.414213, 0, 2.828426, 2)]
-        [DataTestMethod()]
-        public void DistanceToTest(double x1, double y1, double px, double py, double result)
-        {
-            var vector = new Vector2D(x1, y1);
-            var point = new Point2D(px, py);
-            Assert.AreEqual(result, vector.DistanceTo(point), Conversion.E);
-        }
     }
 }
