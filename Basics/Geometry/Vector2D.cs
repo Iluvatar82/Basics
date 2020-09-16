@@ -129,8 +129,6 @@ namespace Basics.Geometry
 
         public double Dot(Vector2D other) => X * other.X + Y * other.Y;
 
-        public static void DistanceTo(Vector2D vector, Point2D point) => vector.DistanceTo(point);
-
         public static double Dot(Vector2D one, Vector2D two) => one.Dot(two);
         #endregion Functions
 

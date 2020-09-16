@@ -93,7 +93,8 @@ namespace Basics.DataTypes.Tests
         public void AddChildTestWithValues2()
         {
             var baseNode = new TreeNode<string>("root");
-            var intermediateNode = baseNode.AddChild("intermediate");
+            TreeNode<string> intermediateNode = "intermediate";
+            baseNode.AddChild(intermediateNode);
             intermediateNode.AddChild("leaf2");
 
             Assert.AreEqual(baseNode.Height, 3);
@@ -126,7 +127,8 @@ namespace Basics.DataTypes.Tests
         public void RemoveSingleChildTest()
         {
             var baseNode = new TreeNode<string>("root");
-            var nodeToDelete = baseNode.AddChild("leaf");
+            var nodeToDelete = new TreeNode<string>("leaf");
+            baseNode.AddChild(nodeToDelete);
             baseNode.AddChild("leaf2");
 
             Assert.AreEqual(baseNode.RemoveChild(nodeToDelete), true);
@@ -156,7 +158,8 @@ namespace Basics.DataTypes.Tests
         public void RemoveChildrenByMultipleValuesTest()
         {
             var baseNode = new TreeNode<int>(8);
-            var subNode = baseNode.AddChild(4);
+            var subNode = new TreeNode<int>(4);
+            baseNode.AddChild(subNode);
             subNode.AddChild(3);
             baseNode.AddChild(5);
             baseNode.AddChild(4);
@@ -176,11 +179,13 @@ namespace Basics.DataTypes.Tests
         public void RemoveChildrenByNodesTest()
         {
             var baseNode = new TreeNode<int>(8);
-            var subNode = baseNode.AddChild(4);
+            var subNode = new TreeNode<int>(4);
+            baseNode.AddChild(subNode);
             subNode.AddChild(3);
             baseNode.AddChild(5);
             baseNode.AddChild(4);
-            var leafNode = baseNode.AddChild(7);
+            var leafNode = new TreeNode<int>(7);
+            baseNode.AddChild(leafNode);
 
             Assert.AreEqual(baseNode.Height, 3);
             Assert.AreEqual(baseNode.Children.Count, 4);

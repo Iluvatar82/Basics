@@ -43,7 +43,7 @@ namespace Basics.DataTypes
         public T Value { get; set; }
 
         public TreeNode<T> Parent { get; set; }
-        public List<TreeNode<T>> Children { get; set; }
+        public virtual List<TreeNode<T>> Children { get; set; }
 
         public bool IsRoot => Parent == default;
         public bool IsLeaf => Children == default || Children.Count == 0;
