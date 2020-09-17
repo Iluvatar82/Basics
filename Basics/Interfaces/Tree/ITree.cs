@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Basics.Interfaces.Tree.Nodes;
 
-namespace Basics.Interfaces
+namespace Basics.Interfaces.Tree
 {
     public interface ITree<T>
     {

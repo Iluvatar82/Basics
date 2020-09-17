@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Basics.Interfaces
+namespace Basics.Interfaces.Tree.Nodes
 {
     public interface ITreeNode<T>
     {

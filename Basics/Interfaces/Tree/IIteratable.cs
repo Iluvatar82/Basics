@@ -1,4 +1,4 @@
-﻿namespace Basics.DataTypes
+﻿namespace Basics.Interfaces.Tree
 {
     public interface IIteratable<T>
     {
