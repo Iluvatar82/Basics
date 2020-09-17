@@ -3,6 +3,7 @@ using Basics.DataTypes;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Basics.DataTypes.Tree.Nodes;
 
 namespace Basics.DataTypes.Tests
 {
@@ -26,7 +27,7 @@ namespace Basics.DataTypes.Tests
         [TestMethod()]
         public void TreeTestWithNode()
         {
-            var tree = new Tree<int>(new TreeNode<int>(8));
+            var tree = new Tree<int>(8);
 
             Assert.AreEqual(tree.Root.Value, 8);
             Assert.AreEqual(tree.Height, 1);
@@ -136,65 +137,6 @@ namespace Basics.DataTypes.Tests
             Assert.AreEqual(baseNode.Children.Count, 1);
             Assert.AreEqual(baseNode.Height, 2);
             Assert.AreEqual(baseNode.Count, 2);
-        }
-
-        [TestMethod()]
-        public void RemoveChildrenByValueTest()
-        {
-            var baseNode = new TreeNode<int>(8);
-            baseNode.AddChild(4);
-            baseNode.AddChild(3);
-            baseNode.AddChild(5);
-            baseNode.AddChild(4);
-            baseNode.AddChild(7);
-
-            Assert.AreEqual(baseNode.RemoveChildren(4), 2);
-            Assert.AreEqual(baseNode.Children.Count, 3);
-            Assert.AreEqual(baseNode.Height, 2);
-            Assert.AreEqual(baseNode.Count, 4);
-        }
-
-        [TestMethod()]
-        public void RemoveChildrenByMultipleValuesTest()
-        {
-            var baseNode = new TreeNode<int>(8);
-            var subNode = new TreeNode<int>(4);
-            baseNode.AddChild(subNode);
-            subNode.AddChild(3);
-            baseNode.AddChild(5);
-            baseNode.AddChild(4);
-            baseNode.AddChild(7);
-
-            Assert.AreEqual(baseNode.Height, 3);
-            Assert.AreEqual(baseNode.Children.Count, 4);
-            Assert.AreEqual(baseNode.Count, 6);
-
-            Assert.AreEqual(baseNode.RemoveChildren(4), 2);
-            Assert.AreEqual(baseNode.Children.Count, 2);
-            Assert.AreEqual(baseNode.Height, 2);
-            Assert.AreEqual(baseNode.Count, 3);
-        }
-
-        [TestMethod()]
-        public void RemoveChildrenByNodesTest()
-        {
-            var baseNode = new TreeNode<int>(8);
-            var subNode = new TreeNode<int>(4);
-            baseNode.AddChild(subNode);
-            subNode.AddChild(3);
-            baseNode.AddChild(5);
-            baseNode.AddChild(4);
-            var leafNode = new TreeNode<int>(7);
-            baseNode.AddChild(leafNode);
-
-            Assert.AreEqual(baseNode.Height, 3);
-            Assert.AreEqual(baseNode.Children.Count, 4);
-            Assert.AreEqual(baseNode.Count, 6);
-
-            Assert.AreEqual(baseNode.RemoveChildren(new List<TreeNode<int>>{ subNode, leafNode }), 2);
-            Assert.AreEqual(baseNode.Children.Count, 2);
-            Assert.AreEqual(baseNode.Height, 2);
-            Assert.AreEqual(baseNode.Count, 3);
         }
     }
 }
