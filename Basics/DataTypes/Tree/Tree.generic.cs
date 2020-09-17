@@ -1,4 +1,5 @@
-﻿using Basics.Interfaces;
+﻿using Basics.Interfaces.Tree;
+using Basics.Interfaces.Tree.Nodes;
 using System;
 using System.Linq;
 

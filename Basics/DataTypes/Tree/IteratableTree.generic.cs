@@ -1,4 +1,4 @@
-﻿using Basics.Interfaces.Nodes;
+﻿using Basics.DataTypes.Tree.Nodes;
 
 namespace Basics.DataTypes
 {

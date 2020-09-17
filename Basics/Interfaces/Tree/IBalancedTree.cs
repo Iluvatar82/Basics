@@ -6,6 +6,8 @@ namespace Basics.Interfaces.Tree
 {
     public interface IBalancedTree<T>
     {
-        public int Rank {get; set;}
+        int Rank { get; }
+
+        void ReBalance();
     }
 }
