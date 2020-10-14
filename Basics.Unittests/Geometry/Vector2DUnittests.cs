@@ -69,18 +69,18 @@ namespace Basics.Geometry.Tests
             Assert.AreEqual(vector.Length, length, Conversion.E);
         }
 
-        [DataRow(0, 0, 2, 3)]
-        [DataRow(1, 0, 3, 1)]
-        [DataRow(1.414, 1.414, 0.5, 0.5)]
-        [DataRow(0, 35.67, 0, 0)]
+        [DataRow(0, 0, 2)]
+        [DataRow(1, 0, 3)]
+        [DataRow(1.414, 1.414, 0.5)]
+        [DataRow(0, 35.67, 0)]
         [DataTestMethod()]
-        public void ScaleTest(double x, double y, double scaleX, double scaleY)
+        public void ScaleTest(double x, double y, double factor)
         {
             var vector = new Vector2D(x, y);
-            vector.Scale(scaleX, scaleY);
+            vector.Scale(factor);
 
-            Assert.AreEqual(vector.X, x * scaleX, Conversion.E);
-            Assert.AreEqual(vector.Y, y * scaleY, Conversion.E);
+            Assert.AreEqual(vector.X, x * factor, Conversion.E);
+            Assert.AreEqual(vector.Y, y * factor, Conversion.E);
         }
 
         [DataRow(1, 0, Conversion.DEGREE_RADIANS_FACTOR * -90, 0, -1)]
