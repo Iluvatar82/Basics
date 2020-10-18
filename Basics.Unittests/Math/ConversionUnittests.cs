@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace Basics.Math.Tests
 {
@@ -15,7 +14,7 @@ namespace Basics.Math.Tests
         {
             var result = Math.Conversion.DegreesToRadians(degrees);
 
-            Assert.AreEqual(result, radians, Math.MathHelper.E);
+            Assert.AreEqual(result, radians, Math.Helper.E);
         }
 
         [DataRow(0, 0)]
@@ -27,7 +26,7 @@ namespace Basics.Math.Tests
         {
             var result = Math.Conversion.RadiansToDegrees(radians);
 
-            Assert.AreEqual(result, degrees, Math.MathHelper.E);
+            Assert.AreEqual(result, degrees, Math.Helper.E);
         }
     }
 }

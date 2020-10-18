@@ -1,6 +1,6 @@
 ﻿namespace Basics.Math
 {
-    public static class MathHelper
+    public static class Helper
     {
         public const double E = 0.00001;
 

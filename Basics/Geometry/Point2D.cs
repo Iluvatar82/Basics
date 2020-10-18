@@ -8,6 +8,8 @@ namespace Basics.Geometry
         public double X { get; set; }
 
         public double Y { get; set; }
+
+        public static Point2D Zero => new Point2D();
         #endregion Variables & Fields
 
 
