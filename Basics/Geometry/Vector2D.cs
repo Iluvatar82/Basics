@@ -1,6 +1,4 @@
-﻿using Basics.MathHelper;
-using System;
-using System.Reflection;
+﻿using System;
 
 namespace Basics.Geometry
 {
@@ -46,7 +44,7 @@ namespace Basics.Geometry
             get
             {
                 if (_lengthSquared != default && _length == default)
-                    _length = Math.Sqrt(_lengthSquared);
+                    _length = System.Math.Sqrt(_lengthSquared);
 
                 return _length;
             }
@@ -65,9 +63,21 @@ namespace Basics.Geometry
                     normalized.Normalize();
                 }
 
-                return Math.Atan2(normalized.X, normalized.Y);
+                return System.Math.Atan2(normalized.X, normalized.Y);
             }
         }
+
+        public static Vector2D Zero => new Vector2D();
+
+        public static Vector2D One => new Vector2D(1);
+
+        public static Vector2D PositiveX => new Vector2D(1, 0);
+
+        public static Vector2D NegativeX => new Vector2D(-1, 0);
+
+        public static Vector2D PositiveY => new Vector2D(0, 1);
+
+        public static Vector2D NegativeY => new Vector2D(0, -1);
         #endregion Variables & Fields
 
 
@@ -141,13 +151,13 @@ namespace Basics.Geometry
 
         public void Rotate(double angle)
         {
-            var x = _x * Math.Cos(angle) - _y * Math.Sin(angle);
-            var y = _x * Math.Sin(angle) + _y * Math.Cos(angle);
+            var x = _x * System.Math.Cos(angle) - _y * System.Math.Sin(angle);
+            var y = _x * System.Math.Sin(angle) + _y * System.Math.Cos(angle);
             _x = x;
             _y = y;
         }
 
-        public void RotateDegrees(double angleInDegrees) => Rotate(Conversion.DegreesToRadians(angleInDegrees));
+        public void RotateDegrees(double angleInDegrees) => Rotate(Math.Conversion.DegreesToRadians(angleInDegrees));
 
         public double Dot(Vector2D other) => X * other.X + Y * other.Y;
 
@@ -164,7 +174,7 @@ namespace Basics.Geometry
             if (!IsNormalized || !other.IsNormalized)
                 return 0;
 
-            return Math.Atan(first.Dot(second));
+            return System.Math.Atan(first.Dot(second));
         }
 
         public void Opposite()

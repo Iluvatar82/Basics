@@ -1,5 +1,5 @@
 ﻿using Basics.Geometry;
-using Basics.MathHelper;
+using Basics.Math;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Basics.Geometry.Tests
@@ -66,7 +66,7 @@ namespace Basics.Geometry.Tests
             var vector = new Vector2D(x, y);
             vector.Normalize();
 
-            Assert.AreEqual(vector.Length, length, Conversion.E);
+            Assert.AreEqual(vector.Length, length, Math.MathHelper.E);
         }
 
         [DataRow(0, 0, 2)]
@@ -79,8 +79,8 @@ namespace Basics.Geometry.Tests
             var vector = new Vector2D(x, y);
             vector.Scale(factor);
 
-            Assert.AreEqual(vector.X, x * factor, Conversion.E);
-            Assert.AreEqual(vector.Y, y * factor, Conversion.E);
+            Assert.AreEqual(vector.X, x * factor, MathHelper.E);
+            Assert.AreEqual(vector.Y, y * factor, MathHelper.E);
         }
 
         [DataRow(1, 0, Conversion.DEGREE_RADIANS_FACTOR * -90, 0, -1)]
@@ -92,8 +92,8 @@ namespace Basics.Geometry.Tests
             vector.Normalize();
             vector.Rotate(angle);
 
-            Assert.AreEqual(vector.X, resultX, Conversion.E);
-            Assert.AreEqual(vector.Y, resultY, Conversion.E);
+            Assert.AreEqual(vector.X, resultX, MathHelper.E);
+            Assert.AreEqual(vector.Y, resultY, MathHelper.E);
         }
 
         [DataRow(1, 0, -90, 0, -1)]
@@ -105,8 +105,8 @@ namespace Basics.Geometry.Tests
             vector.Normalize();
             vector.RotateDegrees(angle);
 
-            Assert.AreEqual(vector.X, resultX, Conversion.E);
-            Assert.AreEqual(vector.Y, resultY, Conversion.E);
+            Assert.AreEqual(vector.X, resultX, MathHelper.E);
+            Assert.AreEqual(vector.Y, resultY, MathHelper.E);
         }
 
         [DataRow(1, 0, 0, 1, 0)]
@@ -120,7 +120,7 @@ namespace Basics.Geometry.Tests
             vector1.Normalize();
             var vector2 = new Vector2D(x2, y2);
             vector2.Normalize();
-            Assert.AreEqual(result, vector1.Dot(vector2), Conversion.E);
+            Assert.AreEqual(result, vector1.Dot(vector2), MathHelper.E);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Basics.Interfaces;
+﻿using Basics.Interfaces.Tree.Nodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

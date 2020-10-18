@@ -1,9 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Basics.DataTypes;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Basics.DataTypes.Tree.Nodes;
+﻿using Basics.DataTypes.Tree.Nodes;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Basics.DataTypes.Tests
 {

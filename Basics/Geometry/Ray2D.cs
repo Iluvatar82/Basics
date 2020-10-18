@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Basics.Geometry
 {
@@ -8,6 +6,7 @@ namespace Basics.Geometry
     {
         #region Variables & Fields
         public Point2D Origin { get; set; }
+
         public Vector2D Direction { get; set; }
         #endregion Variables & Fields
 

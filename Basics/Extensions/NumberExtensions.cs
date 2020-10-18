@@ -1,15 +1,18 @@
 ﻿using Basics.Geometry;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Basics.Mathhelper
+namespace Basics.Extensions
 {
     public static class NumberExtensions
     {
         public static double DecimalValue(this double value) => value - (int)value;
 
-        public static double Constrain(this double value, double minimum, double maximum) => value < minimum ? minimum : (value > maximum ? maximum : value);
+        public static double Constrain(this double value, double minimum, double maximum)
+        {
+            if (minimum > maximum)
+                Math.MathHelper.Swap(ref minimum, ref maximum);
+
+            return value < minimum ? minimum : (value > maximum ? maximum : value);
+        }
 
         public static double Map(this double value, double from, double to, double fromNew, double toNew)
         {
