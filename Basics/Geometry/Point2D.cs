@@ -16,7 +16,7 @@ namespace Basics.Geometry
         public double Y { get; set; }
 
         /// <summary>
-        /// <see cref="Point2D"/> Object with Values <see cref="X"/> = 0, <see cref="Y"/> = 0.
+        /// New <see cref="Point2D"/> Instance. <see cref="X"/> = 0.0, <see cref="Y"/> = -1.0.
         /// </summary>
         public static Point2D Zero => new Point2D();
         #endregion Variables & Fields
@@ -24,7 +24,7 @@ namespace Basics.Geometry
 
         #region Constructors
         /// <summary>
-        /// Create a default <see cref="Point2D"/> with Values <see cref="X"/> = 0, <see cref="Y"/> = 0 (same as <see cref="Zero/>).
+        /// New <see cref="Point2D"/> Instance. <see cref="X"/> = 0, <see cref="Y"/> = 0 (same as <see cref="Zero/>).
         /// </summary>
         public Point2D()
         {
@@ -33,7 +33,7 @@ namespace Basics.Geometry
         }
 
         /// <summary>
-        /// Create a default <see cref="Point2D"/> with Values <see cref="X"/> = <paramref name="value"/>, <see cref="Y"/> = <paramref name="value"/>.
+        /// New <see cref="Point2D"/> Instance. <see cref="X"/> = <paramref name="value"/>, <see cref="Y"/> = <paramref name="value"/>.
         /// </summary>
         /// <param name="value">Value for <see cref="X"/> and <see cref="Y"/>.</param>
         public Point2D(double value)
@@ -43,7 +43,7 @@ namespace Basics.Geometry
         }
 
         /// <summary>
-        /// Create a default <see cref="Point2D"/> with Values <see cref="X"/> = <paramref name="x"/>, <see cref="Y"/> = <paramref name="x"/>.
+        /// New <see cref="Point2D"/> Instance. <see cref="X"/> = <paramref name="x"/>, <see cref="Y"/> = <paramref name="x"/>.
         /// </summary>
         /// <param name="x"><see cref="X"/> Value.</param>
         /// <param name="y"><see cref="Y"/> Value.</param>
@@ -54,7 +54,7 @@ namespace Basics.Geometry
         }
 
         /// <summary>
-        /// Copy Constructor that takes the Values from another <see cref="Point2D"/> to set <see cref="X"/> and <see cref="Y"/>.
+        /// New <see cref="Point2D"/> Instance with Values from another <see cref="Point2D"/> to set <see cref="X"/> and <see cref="Y"/>.
         /// </summary>
         /// <param name="other">Existing <see cref="Point2D"/>.</param>
         public Point2D(Point2D other)
@@ -64,7 +64,7 @@ namespace Basics.Geometry
         }
 
         /// <summary>
-        /// Copy Constructor that takes the Values from a <see cref="Vector2D"/> to set <see cref="X"/> and <see cref="Y"/>.
+        /// New <see cref="Point2D"/> Instance with Values from a <see cref="Vector2D"/> to set <see cref="X"/> and <see cref="Y"/>.
         /// </summary>
         /// <param name="vector">Existing <see cref="Vector2D"/>.</param>
         public Point2D(Vector2D vector)
@@ -117,72 +117,87 @@ namespace Basics.Geometry
         /// Reflect the <see cref="Point2D"/> with the provided <see cref="Vector2D"/> <paramref name="reflector"/>.
         /// </summary>
         /// <param name="reflector">The Reflection <see cref="Vector2D"/>.</param>
-        /// <returns>New reflected <see cref="Point2D"/>.</returns>
-        public Point2D Reflect(Vector2D reflector)
+        public void Reflect(Vector2D reflector)
         {
             if (reflector == null)
-                return (Point2D)Clone();
+                return;
 
             var vector = (Vector2D)this;
             vector.Reflect(reflector);
-            return (Point2D)vector;
+            X = vector.X;
+            Y = vector.Y;
         }
 
         /// <summary>
         /// Reflect the <see cref="Point2D"/> with the provided <see cref="Ray2D"/> <paramref name="ray"/>.
         /// </summary>
         /// <param name="ray">The Reflection <see cref="Ray2D"/>.</param>
-        /// <returns>New reflected <see cref="Point2D"/>.</returns>
-        public Point2D Reflect(Ray2D ray)
+        public void Reflect(Ray2D ray)
         {
             if (ray == null)
-                return (Point2D)Clone();
+                return;
 
             var reflectedPoint = (Point2D)Clone();
             reflectedPoint.Translate((Vector2D)ray.Origin * -1);
             reflectedPoint.Reflect(ray.Direction);
             reflectedPoint.Translate((Vector2D)ray.Origin);
-
-            return reflectedPoint;
+            X = reflectedPoint.X;
+            Y = reflectedPoint.Y;
         }
         #endregion Functions
 
 
         #region Operators
         /// <summary>
-        /// Adds the <paramref name="value"/> to the Point's <see cref="X"/> and <see cref="Y"/> Values.
+        /// Adds the <see cref="Point2D"/>'s Values to the <paramref name="value"/>.
+        /// </summary>
+        /// <param name="value">The Value.</param>
+        /// <param name="point">The <see cref="Point2D"/> to add.</param>
+        /// <returns><see cref="Point2D"/> with new <see cref="X"/> and <see cref="Y"/> Values.</returns>
+        public static Point2D operator +(double value, Point2D point) => new Point2D(point.X + value, point.Y + value);
+
+        /// <summary>
+        /// Adds the <paramref name="value"/> to the <see cref="Point2D"/>'s <see cref="X"/> and <see cref="Y"/> Values.
         /// </summary>
         /// <param name="point">The <see cref="Point2D"/>.</param>
         /// <param name="value">The Value to add to the <paramref name="point"/>'s  <see cref="X"/> and <see cref="Y"/> Values.</param>
-        /// <returns>New Point with new <see cref="X"/> and <see cref="Y"/> Values.</returns>
+        /// <returns><see cref="Point2D"/> with new <see cref="X"/> and <see cref="Y"/> Values.</returns>
         public static Point2D operator +(Point2D point, double value) => new Point2D(point.X + value, point.Y + value);
 
         /// <summary>
-        /// Adds the <paramref name="translationVector"/>'s Values to the Point's <see cref="X"/> and <see cref="Y"/> Values.
+        /// Adds the Values of the <see cref="Vector2D"/> to the <see cref="Point2D"/>'s <see cref="X"/> and <see cref="Y"/> Values.
         /// </summary>
         /// <param name="point">The <see cref="Point2D"/>.</param>
         /// <param name="translationVector"> The Translation <see cref="Vector2D"/>.</param>
-        /// <returns>New Point with new <see cref="X"/> and <see cref="Y"/> Values.</returns>
+        /// <returns><see cref="Point2D"/> with new <see cref="X"/> and <see cref="Y"/> Values.</returns>
         public static Point2D operator +(Point2D point, Vector2D translationVector) => new Point2D(point.X + translationVector.X, point.Y + translationVector.Y);
 
         /// <summary>
-        /// Subtracts the <paramref name="value"/> from the Point's <see cref="X"/> and <see cref="Y"/> Values.
+        /// Subtracts the <<see cref="Point2D"/>'s Values from the <paramref name="value"/>.
+        /// </summary>
+        /// <param name="value">The Value.</param>
+        /// <param name="point">The <see cref="Point2D"/> to subtract.</param>
+        /// <returns><see cref="Point2D"/> with new <see cref="X"/> and <see cref="Y"/> Values.</returns>
+        public static Point2D operator -(double value, Point2D point) => new Point2D(value - point.X, value - point.Y);
+
+        /// <summary>
+        /// Subtracts the <see cref="value"/> from the <see cref="Point2D"/>'s Values.
         /// </summary>
         /// <param name="point">The <see cref="Point2D"/>.</param>
-        /// <param name="value">The Value to subtract from the <paramref name="point"/>'s  <see cref="X"/> and <see cref="Y"/> Values.</param>
-        /// <returns>New Point with new <see cref="X"/> and <see cref="Y"/> Values.</returns>
+        /// <param name="value">The Value to subtract.</param>
+        /// <returns><see cref="Point2D"/> with new <see cref="X"/> and <see cref="Y"/> Values.</returns>
         public static Point2D operator -(Point2D point, double value) => new Point2D(point.X - value, point.Y - value);
 
         /// <summary>
-        /// Subtracts the <paramref name="translationVector"/>'s Values from the Point's <see cref="X"/> and <see cref="Y"/> Values.
+        /// Subtracts the Values of the <see cref="Vector2D"/> from the <see cref="Point2D"/>'s <see cref="X"/> and <see cref="Y"/> Values.
         /// </summary>
         /// <param name="point">The <see cref="Point2D"/>.</param>
         /// <param name="translationVector"> The Translation <see cref="Vector2D"/>.</param>
-        /// <returns>New Point with new <see cref="X"/> and <see cref="Y"/> Values.</returns>
+        /// <returns><see cref="Point2D"/> with new <see cref="X"/> and <see cref="Y"/> Values.</returns>
         public static Point2D operator -(Point2D point, Vector2D translationVector) => new Point2D(point.X - translationVector.X, point.Y - translationVector.Y);
 
         /// <summary>
-        /// COnversion from a <see cref="Vector2D"/> to a new <see cref="Point2D"/>.
+        /// Conversion from a <see cref="Vector2D"/> to a new <see cref="Point2D"/>.
         /// </summary>
         /// <param name="vector">The existing <see cref="Vector2D"/>.</param>
         public static explicit operator Point2D(Vector2D vector) => new Point2D(vector);
@@ -202,7 +217,7 @@ namespace Basics.Geometry
         /// <summary>
         /// Clone the Values of the <see cref="Point2D"/> to a new <see cref="Point2D"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Clone of the <see cref="Point2D"/>.</returns>
         public object Clone() => new Point2D(this);
         #endregion ICloneable
 
@@ -241,7 +256,9 @@ namespace Basics.Geometry
             if (point == null || reflector == null)
                 return null;
 
-            return point.Reflect(reflector);
+            var reflectionPoint = (Point2D)point.Clone();
+            reflectionPoint.Reflect(reflector);
+            return reflectionPoint;
         }
 
         /// <summary>
@@ -255,7 +272,9 @@ namespace Basics.Geometry
             if (point == null || ray == null)
                 return null;
 
-            return point.Reflect(ray);
+            var reflectionPoint = (Point2D)point.Clone();
+            reflectionPoint.Reflect(ray);
+            return reflectionPoint;
         }
         #endregion Static
     }
