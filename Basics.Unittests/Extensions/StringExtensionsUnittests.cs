@@ -16,7 +16,7 @@ namespace Basics.Extensions.Tests
         [DataTestMethod]
         public void TrimStartTest(string baseString, string stringToTrim, string resultString)
         {
-            Assert.AreEqual(baseString?.TrimStart(stringToTrim), resultString);
+            Assert.AreEqual(resultString, baseString?.TrimStart(stringToTrim));
         }
 
         [DataRow(null, null, null)]
@@ -29,7 +29,7 @@ namespace Basics.Extensions.Tests
         [DataTestMethod]
         public void TrimEndTest(string baseString, string stringToTrim, string resultString)
         {
-            Assert.AreEqual(baseString?.TrimEnd(stringToTrim), resultString);
+            Assert.AreEqual(resultString, baseString?.TrimEnd(stringToTrim));
         }
 
         [DataRow(null, null, null)]
@@ -42,7 +42,7 @@ namespace Basics.Extensions.Tests
         [DataTestMethod]
         public void TrimTest(string baseString, string stringToTrim, string resultString)
         {
-            Assert.AreEqual(baseString?.Trim(stringToTrim), resultString);
+            Assert.AreEqual(resultString, baseString?.Trim(stringToTrim));
         }
 
         [DataRow(null, null)]
@@ -52,7 +52,7 @@ namespace Basics.Extensions.Tests
         [DataTestMethod]
         public void CapitalizeFirstCharacterTest(string baseString, string resultString)
         {
-            Assert.AreEqual(baseString?.CapitalizeFirstCharacter(), resultString);
+            Assert.AreEqual(resultString, baseString?.CapitalizeFirstCharacter());
         }
 
         [DataRow("test", null, "\0test\0")]
@@ -61,7 +61,7 @@ namespace Basics.Extensions.Tests
         [DataTestMethod]
         public void DecorateStartEndTest(string toDecorate, char decorator, string resultString)
         {
-            Assert.AreEqual(toDecorate?.DecorateStartEnd(decorator), resultString);
+            Assert.AreEqual(resultString, toDecorate?.DecorateStartEnd(decorator));
         }
 
         [DataRow("test", null, "test")]
@@ -72,7 +72,7 @@ namespace Basics.Extensions.Tests
         [DataTestMethod]
         public void DecorateStartEndTest(string toDecorate, string decorator, string resultString)
         {
-            Assert.AreEqual(toDecorate?.DecorateStartEnd(decorator), resultString);
+            Assert.AreEqual(resultString, toDecorate?.DecorateStartEnd(decorator));
         }
 
         [DataRow(null, null)]
@@ -84,7 +84,7 @@ namespace Basics.Extensions.Tests
         [DataTestMethod]
         public void SQLStringifyTest(string toDecorate, string resultString)
         {
-            Assert.AreEqual(toDecorate?.SQLStringify(), resultString);
+            Assert.AreEqual(resultString, toDecorate?.SQLStringify());
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Basics.Extensions.Tests
             var filter = new Func<int, bool>(i => i % 2 == 0);
             var resultCount = 3;
 
-            Assert.AreEqual(list.Remove(filter).ToList().Count, resultCount);
+            Assert.AreEqual(resultCount, list.Remove(filter).ToList().Count);
         }
     }
 }

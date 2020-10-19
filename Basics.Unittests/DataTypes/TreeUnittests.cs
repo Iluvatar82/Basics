@@ -11,13 +11,13 @@ namespace Basics.DataTypes.Tests
         {
             var tree = new Tree<int>(5);
 
-            Assert.AreEqual(tree.Root.IsRoot, true);
-            Assert.AreEqual(tree.Root.IsLeaf, true);
-            Assert.AreEqual(tree.Root.Value, 5);
-            Assert.AreEqual(tree.Height, 1);
-            Assert.AreEqual(tree.NodeCount, 1);
-            Assert.AreEqual(tree.Root.Height, 1);
-            Assert.AreEqual(tree.Root.Count, 1);
+            Assert.AreEqual(true, tree.Root.IsRoot);
+            Assert.AreEqual(true, tree.Root.IsLeaf);
+            Assert.AreEqual(5, tree.Root.Value);
+            Assert.AreEqual(1, tree.Height);
+            Assert.AreEqual(1, tree.NodeCount);
+            Assert.AreEqual(1, tree.Root.Height);
+            Assert.AreEqual(1, tree.Root.Count);
         }
 
         [TestMethod()]
@@ -25,11 +25,11 @@ namespace Basics.DataTypes.Tests
         {
             var tree = new Tree<int>(8);
 
-            Assert.AreEqual(tree.Root.Value, 8);
-            Assert.AreEqual(tree.Height, 1);
-            Assert.AreEqual(tree.NodeCount, 1);
-            Assert.AreEqual(tree.Root.Height, 1);
-            Assert.AreEqual(tree.Root.Count, 1);
+            Assert.AreEqual(8, tree.Root.Value);
+            Assert.AreEqual(1, tree.Height);
+            Assert.AreEqual(1, tree.NodeCount);
+            Assert.AreEqual(1, tree.Root.Height);
+            Assert.AreEqual(1, tree.Root.Count);
         }
 
         [TestMethod()]
@@ -37,8 +37,8 @@ namespace Basics.DataTypes.Tests
         {
             var treeNode = new TreeNode<string>("abc");
 
-            Assert.AreEqual(treeNode.Height, 1);
-            Assert.AreEqual(treeNode.Count, 1);
+            Assert.AreEqual(1, treeNode.Height);
+            Assert.AreEqual(1, treeNode.Count);
         }
 
         [TestMethod()]
@@ -47,14 +47,14 @@ namespace Basics.DataTypes.Tests
             var baseNode = new TreeNode<string>("root");
             var leafNode = new TreeNode<string>("leaf", baseNode);
 
-            Assert.AreEqual(baseNode.IsRoot, true);
-            Assert.AreEqual(baseNode.IsLeaf, false);
-            Assert.AreEqual(baseNode.Height, 2);
-            Assert.AreEqual(baseNode.Count, 2);
-            Assert.AreEqual(leafNode.IsRoot, false);
-            Assert.AreEqual(leafNode.IsLeaf, true);
-            Assert.AreEqual(leafNode.Height, 1);
-            Assert.AreEqual(leafNode.Count, 1);
+            Assert.AreEqual(true, baseNode.IsRoot);
+            Assert.AreEqual(false, baseNode.IsLeaf);
+            Assert.AreEqual(2, baseNode.Height);
+            Assert.AreEqual(2, baseNode.Count);
+            Assert.AreEqual(false, leafNode.IsRoot);
+            Assert.AreEqual(true, leafNode.IsLeaf);
+            Assert.AreEqual(1, leafNode.Height);
+            Assert.AreEqual(1, leafNode.Count);
         }
 
         [TestMethod()]
@@ -67,12 +67,12 @@ namespace Basics.DataTypes.Tests
             Assert.AreEqual(baseNode.AddChild(intermediateNode), true);
             Assert.AreEqual(intermediateNode.AddChild(leafNode), true);
 
-            Assert.AreEqual(baseNode.Height, 3);
-            Assert.AreEqual(baseNode.Count, 3);
-            Assert.AreEqual(intermediateNode.Height, 2);
-            Assert.AreEqual(intermediateNode.Count, 2);
-            Assert.AreEqual(leafNode.Height, 1);
-            Assert.AreEqual(leafNode.Count, 1);
+            Assert.AreEqual(3, baseNode.Height);
+            Assert.AreEqual(3, baseNode.Count);
+            Assert.AreEqual(2, intermediateNode.Height);
+            Assert.AreEqual(2, intermediateNode.Count);
+            Assert.AreEqual(1, leafNode.Height);
+            Assert.AreEqual(1, leafNode.Count);
         }
 
         [TestMethod()]
@@ -82,8 +82,8 @@ namespace Basics.DataTypes.Tests
             baseNode.AddChild("leaf");
             baseNode.AddChild("leaf2");
 
-            Assert.AreEqual(baseNode.Height, 2);
-            Assert.AreEqual(baseNode.Count, 3);
+            Assert.AreEqual(2, baseNode.Height);
+            Assert.AreEqual(3, baseNode.Count);
         }
 
         [TestMethod()]
@@ -94,10 +94,10 @@ namespace Basics.DataTypes.Tests
             baseNode.AddChild(intermediateNode);
             intermediateNode.AddChild("leaf2");
 
-            Assert.AreEqual(baseNode.Height, 3);
-            Assert.AreEqual(baseNode.Count, 3);
-            Assert.AreEqual(intermediateNode.Height, 2);
-            Assert.AreEqual(intermediateNode.Count, 2);
+            Assert.AreEqual(3, baseNode.Height);
+            Assert.AreEqual(3, baseNode.Count);
+            Assert.AreEqual(2, intermediateNode.Height);
+            Assert.AreEqual(2, intermediateNode.Count);
         }
 
         [TestMethod()]
@@ -112,12 +112,12 @@ namespace Basics.DataTypes.Tests
             intermediateNode.AddChild(intermediateNode2);
             intermediateNode2.AddChild("leaf2");
 
-            Assert.AreEqual(baseNode.Height, 4);
-            Assert.AreEqual(baseNode.Count, 5);
-            Assert.AreEqual(intermediateNode.Height, 3);
-            Assert.AreEqual(intermediateNode.Count, 3);
-            Assert.AreEqual(intermediateNode2.Height, 2);
-            Assert.AreEqual(intermediateNode2.Count, 2);
+            Assert.AreEqual(4, baseNode.Height);
+            Assert.AreEqual(5, baseNode.Count);
+            Assert.AreEqual(3, intermediateNode.Height);
+            Assert.AreEqual(3, intermediateNode.Count);
+            Assert.AreEqual(2, intermediateNode2.Height);
+            Assert.AreEqual(2, intermediateNode2.Count);
         }
 
         [TestMethod()]
@@ -128,11 +128,11 @@ namespace Basics.DataTypes.Tests
             baseNode.AddChild(nodeToDelete);
             baseNode.AddChild("leaf2");
 
-            Assert.AreEqual(baseNode.RemoveChild(nodeToDelete), true);
-            Assert.AreEqual(nodeToDelete.Parent, null);
-            Assert.AreEqual(baseNode.Children.Count, 1);
-            Assert.AreEqual(baseNode.Height, 2);
-            Assert.AreEqual(baseNode.Count, 2);
+            Assert.AreEqual(true, baseNode.RemoveChild(nodeToDelete));
+            Assert.AreEqual(null, nodeToDelete.Parent);
+            Assert.AreEqual(1, baseNode.Children.Count);
+            Assert.AreEqual(2, baseNode.Height);
+            Assert.AreEqual(2, baseNode.Count);
         }
     }
 }

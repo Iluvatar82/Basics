@@ -270,10 +270,7 @@ namespace Basics.Geometry
             var second = (Vector2D)other.Clone();
             second.Normalize();
 
-            if (!IsNormalized || !other.IsNormalized)
-                return 0;
-
-            return System.Math.Atan(first.Dot(second));
+            return System.Math.Acos(first.Dot(second));
         }
 
         /// <summary>
