@@ -86,5 +86,33 @@ namespace Basics.Extensions.Tests
         {
             Assert.AreEqual(resultString, toDecorate?.SQLStringify());
         }
+
+        [TestMethod()]
+        public void FixedWidthLeftAlignTest()
+        {
+            var baseString = "This is a Test of alignment";
+            var alignedString = baseString + '\x2002'.Repeat(8);
+            Assert.AreEqual(alignedString, baseString.FixedWidthLeftAlign(35));
+        }
+
+        [TestMethod()]
+        public void FixedWidthRightAlignTest()
+        {
+            var baseString = "This is a Test of alignment";
+            var alignedString = '\x2002'.Repeat(8) + baseString;
+            Assert.AreEqual(alignedString, baseString.FixedWidthRightAlign(35));
+        }
+
+        [DataRow("ABC", 1, "ABC")]
+        [DataRow("A", -1, "")]
+        [DataRow("ya", 4, "yayayaya")]
+        [DataRow("anna", 2, "annaanna")]
+        [DataRow("ban", 4, "banbanbanban")]
+        [DataTestMethod]
+        public void RepeatTest(string inputString, int repetitions, string resultString)
+        {
+            var repeatedString = inputString.Repeat(repetitions);
+            Assert.AreEqual(resultString, repeatedString);
+        }
     }
 }

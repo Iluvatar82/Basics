@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Basics.Extensions;
+using Basics.Math;
+using System;
 
 namespace Basics.Geometry
 {
@@ -76,14 +78,32 @@ namespace Basics.Geometry
         /// </summary>
         /// <param name="point">The <see cref="Point2D"/>.</param>
         /// <returns>Closest <see cref="Point2D"/> on the <see cref="Ray2D"/>.</returns>
-        public Point2D ClosestPoint(Point2D point)
+        public Point2D ClosestPointOnRay(Point2D point)
         {
             if (point == null)
                 return null;
 
+            var normalizedDirection = (Vector2D)Direction.Clone();
+            if (!normalizedDirection.IsNormalized)
+                normalizedDirection.Normalize();
+
             var originToPoint = (Vector2D)point - (Vector2D)Origin;
-            var projectedLength = originToPoint.Dot(Direction);
-            return Origin + Direction * projectedLength;
+            var projectedLength = originToPoint.Dot(normalizedDirection);
+            return Origin + normalizedDirection * projectedLength;
+        }
+
+        /// <summary>
+        /// Calculate the Distance to the <see cref="Point2D"/>.
+        /// </summary>
+        /// <param name="point">The <see cref="Point2D"/>.</param>
+        /// <returns>Distance to the <see cref="Point2D"/>.</returns>
+        public double Distance(Point2D point)
+        {
+            if (point == null)
+                return 0;
+
+            var closestPoint = ClosestPointOnRay(point);
+            return point.Distance(closestPoint);
         }
 
         /// <summary>
@@ -93,10 +113,11 @@ namespace Basics.Geometry
         /// <returns>Intersection <see cref="Point2D"/>.</returns>
         public Point2D Intersection(Ray2D other)
         {
-            if (other == null)
+            if (other == null || other.Direction == null || other.Direction.Length == 0)
                 return null;
 
-            if (Direction.Heading == other.Direction.Heading || Direction.Heading == other.Direction.Heading * -1)
+            if (System.Math.Abs(Direction.Heading.NormalizeAngle() - other.Direction.Heading.NormalizeAngle()) < Helper.E ||
+                System.Math.Abs(Direction.Heading.NormalizeAngle() - (other.Direction.Heading + Helper.PI).NormalizeAngle()) < Helper.E)
                 return null;
 
             var originVector = new Vector2D(Origin - new Vector2D(other.Origin));
@@ -131,12 +152,41 @@ namespace Basics.Geometry
         /// <param name="ray">The <see cref="Ray2D"/>.</param>
         /// <param name="point">The <see cref="Point2D"/>.</param>
         /// <returns>Closest <see cref="Point2D"/> on the <see cref="Ray2D"/>.</returns>
-        public static Point2D ClosestPoint(Ray2D ray, Point2D point)
+        public static Point2D ClosestPointOnRay(Ray2D ray, Point2D point)
         {
             if (ray == null || point == null)
                 return null;
 
-            return ray.ClosestPoint(point);
+            return ray.ClosestPointOnRay(point);
+        }
+
+        /// <summary>
+        /// Calculates the Distance between the <see cref="Point2D"/> and the <see cref="Ray2D"/>.
+        /// </summary>
+        /// <param name="ray">The <see cref="Ray2D"/>.</param>
+        /// <param name="point">The <see cref="Point2D"/>.</param>
+        /// <returns>Closest <see cref="Point2D"/> on the <see cref="Ray2D"/>.</returns>
+        public static double Distance(Ray2D ray, Point2D point)
+        {
+            if (point == null)
+                return 0;
+
+            var closestPoint = ClosestPointOnRay(ray, point);
+            return point.Distance(closestPoint);
+        }
+
+        /// <summary>
+        /// Calculate the Intersection-<see cref="Point2D"/> of two <see cref="Ray2D"/>s.
+        /// </summary>
+        /// <param name="first">The first <see cref="Ray2D"/>.</param>
+        /// <param name="second">The second <see cref="Ray2D"/>.</param>
+        /// <returns>Intersection <see cref="Point2D"/>.</returns>
+        public static Point2D Intersection(Ray2D first, Ray2D second)
+        {
+            if (first == null || second == null || first.Direction == null || first.Direction.Length == 0 || second.Direction == null || second.Direction.Length == 0)
+                return null;
+
+            return first.Intersection(second);
         }
         #endregion Static
     }

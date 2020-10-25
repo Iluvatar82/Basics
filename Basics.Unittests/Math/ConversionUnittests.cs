@@ -12,9 +12,9 @@ namespace Basics.Math.Tests
         [DataTestMethod()]
         public void DegreesToRadiansTest(double degrees, double radians)
         {
-            var result = Math.Conversion.DegreesToRadians(degrees);
+            var result = Conversion.DegreesToRadians(degrees);
 
-            Assert.AreEqual(result, radians, Math.Helper.E);
+            Assert.AreEqual(result, radians, Helper.E);
         }
 
         [DataRow(0, 0)]
@@ -24,9 +24,9 @@ namespace Basics.Math.Tests
         [DataTestMethod()]
         public void RadiansToDegreesTest(double radians, double degrees)
         {
-            var result = Math.Conversion.RadiansToDegrees(radians);
+            var result = Conversion.RadiansToDegrees(radians);
 
-            Assert.AreEqual(result, degrees, Math.Helper.E);
+            Assert.AreEqual(result, degrees, Helper.E);
         }
     }
 }

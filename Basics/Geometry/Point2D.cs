@@ -97,6 +97,19 @@ namespace Basics.Geometry
         public double Distance(Point2D other) => new Vector2D(this - new Vector2D(other)).Length;
 
         /// <summary>
+        /// Calculates the Distance to a <see cref="Ray2D"/>.
+        /// </summary>
+        /// <param name="ray">The <see cref="Ray2D"/> to calculate the Distance to.</param>
+        /// <returns>Distance from the <see cref="Point2D"/> to the <paramref name="ray"/> <see cref="Ray2D"/>.</returns>
+        public double Distance(Ray2D ray)
+        {
+            if (ray == null)
+                return 0;
+
+            return ray.Distance(this);
+        }
+
+        /// <summary>
         /// Rotates the <see cref="Point2D"/> around the <paramref name="origin"/>.
         /// </summary>
         /// <param name="angle">Angle of the Rotation (in Radians).</param>

@@ -1,7 +1,7 @@
-﻿using Basics.Interfaces.Tree;
+﻿using Basics.DataTypes.Tree.Nodes;
+using Basics.Interfaces.Tree;
 using Basics.Interfaces.Tree.Nodes;
 using System;
-using System.Linq;
 
 namespace Basics.DataTypes
 {
@@ -19,7 +19,7 @@ namespace Basics.DataTypes
 
         public Tree(T rootValue)
         {
-            Root = (ITreeNode<T>)rootValue;
+            Root = (TreeNode<T>)rootValue;
         }
 
         public Tree(ITreeNode<T> root)

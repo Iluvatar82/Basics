@@ -144,5 +144,29 @@
         /// <param name="sqlValue">The Input String.</param>
         /// <returns>SQL Version of the Input String.</returns>
         public static string SQLStringify(this string sqlValue) => DecorateStartEnd(sqlValue, '\'');
+
+        /// <summary>
+        /// The <see cref="string"/> that should be left Aligned (also works with variable width Character Fonts by using a special Blank Character).
+        /// </summary>
+        /// <param name="toAlign">The <see cref="string"/> that should be left aligned to a certain length.</param>
+        /// <param name="length">The desired Length of the <see cref="string"/>.</param>
+        /// <returns>The aligned <see cref="string"/>.</returns>
+        public static string FixedWidthLeftAlign(this string toAlign, int length) => toAlign?.PadRight(length, '\x2002');
+
+        /// <summary>
+        /// The <see cref="string"/> that should be right Aligned (also works with variable width Character Fonts by using a special Blank Character).
+        /// </summary>
+        /// <param name="toAlign">The <see cref="string"/> that should be right aligned to a certain length.</param>
+        /// <param name="length">The desired Length of the <see cref="string"/>.</param>
+        /// <returns>The aligned <see cref="string"/>.</returns>
+        public static string FixedWidthRightAlign(this string toAlign, int length) => toAlign?.PadLeft(length, '\x2002');
+
+        /// <summary>
+        /// Repeats a <see cref="string"/> <paramref name="repetitions"/> times.
+        /// </summary>
+        /// <param name="toRepeat">The <see cref="string"/> to repeat.</param>
+        /// <param name="repetitions">The number of Repititions.</param>
+        /// <returns>The repeated <see cref="string"/>.</returns>
+        public static string Repeat(this string toRepeat, int repetitions) => string.Join(string.Empty, LinqExtensions.Repeat(toRepeat, repetitions));
     }
 }

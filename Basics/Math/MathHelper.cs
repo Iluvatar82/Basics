@@ -1,4 +1,6 @@
-﻿namespace Basics.Math
+﻿using System.Net.NetworkInformation;
+
+namespace Basics.Math
 {
     public static class Helper
     {
@@ -7,6 +9,16 @@
         /// Used for comparing two Numbers. Allowed Delta of the Values for them to be seen as "equal".
         /// </summary>
         public const double E = 0.00001;
+
+        /// <summary>
+        /// Number Pi
+        /// </summary>
+        public const double PI = System.Math.PI;
+
+        /// <summary>
+        /// Number Pi * 2 (a full Circle in Radians, i.e. 360°)
+        /// </summary>
+        public const double TwoPI = PI * 2;
         #endregion Constants
 
 
@@ -22,6 +34,8 @@
             first = second;
             second = temp;
         }
+
+
         #endregion Functions
     }
 }

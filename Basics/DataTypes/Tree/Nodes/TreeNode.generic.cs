@@ -1,4 +1,6 @@
 ﻿using Basics.Interfaces.Tree.Nodes;
+using Basics.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,7 +34,7 @@ namespace Basics.DataTypes.Tree.Nodes
         {
             Parent = parent;
             if (Parent != null)
-                Parent.AddChild((ITreeNode<T>)this);
+                Parent.AddChild(this);
         }
         #endregion Constructors
 
@@ -51,7 +53,7 @@ namespace Basics.DataTypes.Tree.Nodes
             return true;
         }
 
-        public virtual bool AddChild(T value) => AddChild((ITreeNode<T>)value);
+        public virtual bool AddChild(T value) => AddChild((TreeNode<T>)value);
 
         public virtual bool RemoveChild(ITreeNode<T> node)
         {
@@ -62,7 +64,13 @@ namespace Basics.DataTypes.Tree.Nodes
             return Children.Remove(node);
         }
 
-        public virtual bool RemoveChild(T value) => RemoveChild((ITreeNode<T>)value);
+        public virtual bool RemoveChild(T value)
+        {
+            if (Children == default || !Children.Any())
+                return false;
+
+            return Children.RemoveAll(i => i.Value.Equals(value)) > 0;
+        }
         #endregion Functions
 
 

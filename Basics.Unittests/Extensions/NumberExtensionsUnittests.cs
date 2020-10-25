@@ -1,4 +1,5 @@
 ﻿using Basics.Geometry;
+using Basics.Math;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Basics.Extensions.Tests
@@ -14,7 +15,7 @@ namespace Basics.Extensions.Tests
         [DataTestMethod()]
         public void DecimalValue(double value, double result)
         {
-            Assert.AreEqual(value.DecimalValue(), result, Math.Helper.E);
+            Assert.AreEqual(value.DecimalValue(), result, Helper.E);
         }
 
         [DataRow(1.1, 0.1)]
@@ -23,9 +24,9 @@ namespace Basics.Extensions.Tests
         {
             var one = second;
             var two = first;
-            Math.Helper.Swap(ref first, ref second);
-            Assert.AreEqual(first, one, Math.Helper.E);
-            Assert.AreEqual(second, two, Math.Helper.E);
+            Helper.Swap(ref first, ref second);
+            Assert.AreEqual(first, one, Helper.E);
+            Assert.AreEqual(second, two, Helper.E);
         }
 
         [DataRow(0.54, 0, 1, 0.54)]
@@ -38,7 +39,7 @@ namespace Basics.Extensions.Tests
         [DataTestMethod()]
         public void Constrain(double value, double minimum, double maximum, double result)
         {
-            Assert.AreEqual(result, value.Constrain(minimum, maximum), Math.Helper.E);
+            Assert.AreEqual(result, value.Constrain(minimum, maximum), Helper.E);
         }
 
         [DataRow(0, 0, 1, 0)]
@@ -53,7 +54,7 @@ namespace Basics.Extensions.Tests
         [DataTestMethod()]
         public void Fraction(double value, double from, double to, double result)
         {
-            Assert.AreEqual(result, value.Fraction(from, to), Math.Helper.E);
+            Assert.AreEqual(result, value.Fraction(from, to), Helper.E);
         }
 
         [DataRow(0, 0, 1, 10, 11, 10)]
@@ -67,7 +68,7 @@ namespace Basics.Extensions.Tests
         [DataTestMethod()]
         public void Map(double value, double from, double to, double fromNew, double toNew, double result)
         {
-            Assert.AreEqual(result, value.Map(from, to, fromNew, toNew), Math.Helper.E);
+            Assert.AreEqual(result, value.Map(from, to, fromNew, toNew), Helper.E);
         }
 
         [DataRow(0, 0, 1, 10, 11, 10)]
@@ -81,7 +82,7 @@ namespace Basics.Extensions.Tests
         [DataTestMethod()]
         public void Interpolate(double position, double fromPosition, double toPosition, double valueFrom, double valueTo, double result)
         {
-            Assert.AreEqual(result, position.Interpolate(fromPosition, toPosition, valueFrom, valueTo), Math.Helper.E);
+            Assert.AreEqual(result, position.Interpolate(fromPosition, toPosition, valueFrom, valueTo), Helper.E);
         }
 
         [DataRow(0, 0, 0, 1, 0, 1, 0)]
@@ -103,7 +104,22 @@ namespace Basics.Extensions.Tests
         public void InterpolatePoint(double pointX, double pointY, double valueLowerLeft, double valueLowerRight, double valueUpperLeft, double valueUpperRight, double result)
         {
             var point = new Point2D(pointX, pointY);
-            Assert.AreEqual(result, point.Interpolate(valueLowerLeft, valueLowerRight, valueUpperLeft, valueUpperRight), Math.Helper.E);
+            Assert.AreEqual(result, point.Interpolate(valueLowerLeft, valueLowerRight, valueUpperLeft, valueUpperRight), Helper.E);
+        }
+
+        [DataRow(0, 0)]
+        [DataRow(1, 1)]
+        [DataRow(5.454, 5.454)]
+        [DataRow(Helper.TwoPI, 0)]
+        [DataRow(Helper.TwoPI + 2.45, 2.45)]
+        [DataRow(Helper.TwoPI * 4 + 1.222, 1.222)]
+        [DataRow(-Helper.TwoPI, 0)]
+        [DataRow(-Helper.PI, Helper.PI)]
+        [DataTestMethod()]
+        public void NormalizeAngleTest(double angle, double resultingAngle)
+        {
+            var notmalizedAngle = angle.NormalizeAngle();
+            Assert.AreEqual(resultingAngle, notmalizedAngle, Helper.E);
         }
     }
 }

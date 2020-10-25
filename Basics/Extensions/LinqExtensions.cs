@@ -25,5 +25,40 @@ namespace Basics.Extensions
                 yield return item;
             }
         }
+
+        /// <summary>
+        /// Converts an <paramref name="item"/> to an Enumerable of Type <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of the Item.</typeparam>
+        /// <param name="item">The Item to create an Enumerable from.</param>
+        /// <returns>Enumerable representing the single <paramref name="item"/>.</returns>
+        public static IEnumerable<T> ItemToEnumerable<T>(this T item)
+        {
+            yield return item;
+        }
+
+        /// <summary>
+        /// Converts an <paramref name="item"/> to a <see cref="List{T}"/> of Type <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of the Item.</typeparam>
+        /// <param name="item">The Item to create an Enumerable from.</param>
+        /// <returns>Enumerable representing the single <paramref name="item"/>.</returns>
+        public static List<T> ItemToList<T>(this T item) => new List<T> { item };
+
+        /// <summary>
+        /// Repeats a single <paramref name="item"/> multiple <paramref name="repetitions"/> and creates an Enumerable.
+        /// </summary>
+        /// <typeparam name="T">Type of the Element.</typeparam>
+        /// <param name="item">The Item to create an Enumerable from.</param>
+        /// <param name="repetitions">The number of Repititions wanted.</param>
+        /// <returns>Enumerable representing the <paramref name="item"/> multiple times.</returns>
+        public static IEnumerable<T> Repeat<T>(this T item, int repetitions)
+        {
+            if (repetitions < 1)
+                yield break;
+
+            for (var i = 0; i < repetitions; i++)
+                yield return item;
+        }
     }
 }

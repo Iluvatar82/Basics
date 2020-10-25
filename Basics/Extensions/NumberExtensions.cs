@@ -1,4 +1,5 @@
 ﻿using Basics.Geometry;
+using Basics.Math;
 
 namespace Basics.Extensions
 {
@@ -21,7 +22,7 @@ namespace Basics.Extensions
         public static double Constrain(this double value, double minimum, double maximum)
         {
             if (minimum > maximum)
-                Math.Helper.Swap(ref minimum, ref maximum);
+                Helper.Swap(ref minimum, ref maximum);
 
             return value < minimum ? minimum : (value > maximum ? maximum : value);
         }
@@ -89,6 +90,20 @@ namespace Basics.Extensions
             var lowerValueInterpolation = x.Interpolate(0, 1, valueLowerLeft, valueLowerRight);
             var upperValueInterpolation = x.Interpolate(0, 1, valueUpperLeft, valueUpperRight);
             return y.Interpolate(0, 1, lowerValueInterpolation, upperValueInterpolation);
+        }
+
+        /// <summary>
+        /// Brings an Angle (in Radians) to the normalized Range [0, TwoPI].
+        /// </summary>
+        /// <param name="angleInRadians">The Angle in Radians.</param>
+        /// <returns>The angle in the Range [0, TwoPI].</returns>
+        public static double NormalizeAngle(this double angleInRadians)
+        {
+            var result = angleInRadians % Helper.TwoPI;
+            if (result < 0)
+                result += Helper.TwoPI;
+
+            return result;
         }
     }
 }

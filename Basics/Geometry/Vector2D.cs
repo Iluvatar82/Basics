@@ -290,13 +290,11 @@ namespace Basics.Geometry
         /// <param name="other">The second <see cref="Vector2D"/>.</param>
         public void Reflect(Vector2D other)
         {
-            if (other == null)
+            if (other == null || other.Length == 0.0)
                 return;
 
             var reflector = (Vector2D)other.Clone();
             reflector.Normalize();
-            if (!other.IsNormalized)
-                return;
 
             var projectedLength = Dot(reflector);
             var reflectionPoint = new Point2D(reflector * projectedLength);
@@ -434,7 +432,7 @@ namespace Basics.Geometry
         /// <param name="first">The first <see cref="Vector2D"/>.</param>
         /// <param name="second">The second <see cref="Vector2D"/>.</param>
         /// <returns>Angle between the two <see cref="Vector2D"/>'s (in Radians).</returns>
-        public double AngleBetween(Vector2D first, Vector2D second) => (first == null || second == null) ? 0 : first.AngleBetween(second);
+        public static double AngleBetween(Vector2D first, Vector2D second) => (first == null || second == null) ? 0 : first.AngleBetween(second);
 
         /// <summary>
         /// Reflect the <paramref name="vector"/> <see cref="Vector2D"/> with the <paramref name="reflector"/> <see cref="Vector2D"/>.
@@ -442,7 +440,7 @@ namespace Basics.Geometry
         /// <param name="vector">The <see cref="Vector2D"/> to be reflected.</param>
         /// <param name="reflector">The <see cref="Vector2D"/> to reflect.</param>
         /// <returns><see cref="Vector2D"/> the is reflected.</returns>
-        public Vector2D Reflect(Vector2D vector, Vector2D reflector)
+        public static Vector2D Reflect(Vector2D vector, Vector2D reflector)
         {
             if (vector == null || reflector == null)
                 return null;
