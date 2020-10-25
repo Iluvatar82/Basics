@@ -205,7 +205,7 @@ namespace Basics.Geometry.Tests
         {
             var vector = new Vector2D(-3.21, 2.76);
             var clonedVector = (Vector2D)vector.Clone();
-            clonedVector.Y *= -2; 
+            clonedVector.Y *= -2;
 
             Assert.AreEqual(vector.X, clonedVector.X);
             Assert.AreNotEqual(vector.Y, clonedVector.Y);

@@ -1,6 +1,4 @@
-﻿using System.Net.NetworkInformation;
-
-namespace Basics.Math
+﻿namespace Basics.Math
 {
     public static class Helper
     {

@@ -1,4 +1,3 @@
-using Basics.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Basics.Extensions.Tests

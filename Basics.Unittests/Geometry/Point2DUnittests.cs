@@ -214,7 +214,7 @@ namespace Basics.Geometry.Tests
         public void StaticRotateNoOriginTest(double pointX, double pointY, double angleInDegrees, double resultX, double resultY)
         {
             var point = new Point2D(pointX, pointY);
-             var rotatedPoint = Point2D.Rotate(point, Conversion.DegreesToRadians(angleInDegrees));
+            var rotatedPoint = Point2D.Rotate(point, Conversion.DegreesToRadians(angleInDegrees));
 
             Assert.AreEqual(resultX, rotatedPoint.X, Helper.E);
             Assert.AreEqual(resultY, rotatedPoint.Y, Helper.E);

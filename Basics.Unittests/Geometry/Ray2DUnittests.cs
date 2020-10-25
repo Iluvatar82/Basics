@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Basics.Math;
+﻿using Basics.Math;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Basics.Geometry.Tests
 {

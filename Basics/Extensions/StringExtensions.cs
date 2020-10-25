@@ -109,7 +109,7 @@
 
             var result = new char[baseString.Length];
             var isFirstCharacter = true;
-            for(var i = 0; i < baseString.Length; i++)
+            for (var i = 0; i < baseString.Length; i++)
             {
                 if (isFirstCharacter)
                     result[i] = char.ToUpperInvariant(baseString[i]);

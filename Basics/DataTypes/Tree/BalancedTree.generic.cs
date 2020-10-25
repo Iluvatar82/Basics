@@ -19,7 +19,7 @@ namespace Basics.DataTypes.Tree
         }
 
         public BalancedTree(int rank, T rootValue)
-            :this(rank)
+            : this(rank)
         {
             Root = new BinaryTreeNode<T>(rootValue);
         }
