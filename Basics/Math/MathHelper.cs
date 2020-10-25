@@ -32,8 +32,6 @@
             first = second;
             second = temp;
         }
-
-
         #endregion Functions
     }
 }
