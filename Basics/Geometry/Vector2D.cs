@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace Basics.Geometry
 {
@@ -231,6 +232,22 @@ namespace Basics.Geometry
         }
 
         /// <summary>
+        /// Constrain the <see cref="Length"/> of the <see cref="Vector2D"/> to the specified maximum Length.
+        /// </summary>
+        /// <param name="maximumLength">The maximum Length allowed for the <see cref="Vector2D"/>.</param>
+        public void Constrain(double maximumLength)
+        {
+            if (maximumLength <= 0)
+                return;
+
+            if (Length > maximumLength)
+            {
+                var factor = maximumLength / Length;
+                Scale(factor);
+            }
+        }
+
+        /// <summary>
         /// Rotate the <see cref="Vector2D"/> with the provided <paramref name="angle"/>.
         /// </summary>
         /// <param name="angle">The Rotation Angle.</param>
@@ -418,6 +435,19 @@ namespace Basics.Geometry
 
 
         #region Static
+        /// <summary>
+        /// Constrain the <see cref="Length"/> of the <see cref="Vector2D"/> to the specified maximum Length.
+        /// </summary>
+        /// <param name="vector">The <see cref="Vector2D"/> that should be constrained.</param>
+        /// <param name="maximumLength">The maximum Length allowed for the Length of <see cref="Vector2D"/>.</param>
+        /// <returns>The constrained <see cref="Vector2D"/>.</returns>
+        public static Vector2D Constrain(Vector2D vector, double maximumLength)
+        {
+            var constrainedVector = (Vector2D)vector.Clone();
+            constrainedVector.Constrain(maximumLength);
+            return constrainedVector;
+        }
+
         /// <summary>
         /// Calculates the Dot Product for the two <see cref="Vector2D"/>'s <paramref name="first"/> and <paramref name="second"/>.
         /// </summary>

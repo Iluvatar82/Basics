@@ -1,4 +1,5 @@
-﻿using Basics.Math;
+﻿using Basics.Geometry;
+using Basics.Math;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Basics.Geometry.Tests
@@ -92,6 +93,17 @@ namespace Basics.Geometry.Tests
 
             Assert.AreEqual(x * factor, vector.X, Helper.E);
             Assert.AreEqual(y * factor, vector.Y, Helper.E);
+        }
+
+        [DataRow(10, 0, 5)]
+        [DataRow(0, 2, 5)]
+        [DataTestMethod()]
+        public void ConstrainTest(double x, double y, double maximumLength)
+        {
+            var vector = new Vector2D(x, y);
+            vector.Constrain(maximumLength);
+            var minimumLength = System.Math.Min(maximumLength, vector.Length);
+            Assert.AreEqual(minimumLength, vector.Length, Helper.E);
         }
 
         [DataRow(1, 0, Conversion.DEGREE_RADIANS_FACTOR * -90, 0, -1)]
@@ -209,6 +221,17 @@ namespace Basics.Geometry.Tests
 
             Assert.AreEqual(vector.X, clonedVector.X);
             Assert.AreNotEqual(vector.Y, clonedVector.Y);
+        }
+
+        [DataRow(10, 0, 5)]
+        [DataRow(0, 2, 5)]
+        [DataTestMethod()]
+        public void StaticConstrainTest(double x, double y, double maximumLength)
+        {
+            var vector = new Vector2D(x, y);
+            var constrainedVector = Vector2D.Constrain(vector, maximumLength);
+            var minimumLength = System.Math.Min(maximumLength, constrainedVector.Length);
+            Assert.AreEqual(minimumLength, constrainedVector.Length, Helper.E);
         }
 
         [DataRow(1, 0, 0, 1, 0)]
